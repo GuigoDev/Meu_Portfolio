@@ -14,9 +14,17 @@
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-family: 'Jaro', sans-serif;
+  font-size: 40px; 
+  font-weight: 400;
   color: var(--text-light);
+  text-decoration: none; 
+  letter-spacing: 1px; 
+}
+
+.logo-highlight {
+  font-family: 'Jaro', sans-serif;
+  color: #F97316;
 }
 
 .nav-links {
