@@ -9,6 +9,7 @@ export const Home = () => {
   const [repos, setRepos] = useState<GitHubRepoDTO[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedTechnology, setSelectedTechnology] = useState('Todos');
+  
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
@@ -44,6 +45,7 @@ export const Home = () => {
   return (
     <div>
       <Hero />
+      
       <SkillsDashboard 
         selectedTechnology={selectedTechnology} 
         onTechnologySelect={(tech) => {
@@ -84,7 +86,6 @@ export const Home = () => {
                 ))}
               </div>
 
-              {/* Controles de Paginação */}
               {totalPages > 1 && (
                 <div className="pagination-controls">
                   <button 
@@ -94,11 +95,7 @@ export const Home = () => {
                   >
                     &lt;
                   </button>
-                  
-                  <span className="pagination-info">
-                    {currentPage} 
-                  </span>
-
+                  <span className="pagination-info">{currentPage}</span>
                   <button 
                     onClick={() => goToPage(currentPage + 1)} 
                     disabled={currentPage === totalPages}
@@ -110,6 +107,18 @@ export const Home = () => {
               )}
             </>
           )}
+        </div>
+      </section>
+
+      <section className="projects-section" id="contact">
+        <div className="container">
+          <h2 className="section-title">Contato</h2>
+          <div className="section-divider"></div>
+          <p className="loading-text">Entre em contato comigo!</p>
+          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+            {/* Lembre-se de colocar seu e-mail real aqui */}
+            <a href="mailto:guilherme.romero074@gmail.com" className="btn btn-primary">Enviar E-mail</a>
+          </div>
         </div>
       </section>
     </div>
