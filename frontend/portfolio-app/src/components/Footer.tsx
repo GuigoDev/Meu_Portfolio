@@ -43,7 +43,7 @@ export const Footer = () => {
             </div>
 
             <div className="contact-item whatsapp-item">
-              <span className="contact-label">Contato pelo WhatsApp:</span>
+              <span className="contact-label">WhatsApp:</span>
               <a 
                 href="https://wa.me/5541984486364?text=Olá Guilherme, vi seu portfólio e gostaria de conversar!" 
                 target="_blank" 
