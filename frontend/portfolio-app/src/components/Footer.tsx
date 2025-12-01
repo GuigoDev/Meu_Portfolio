@@ -1,21 +1,42 @@
+import { useState } from 'react';
 import './Footer.css';
 
 export const Footer = () => {
+  const [showToast, setShowToast] = useState(false);
+  const email = "guilherme.romero074@gmail.com";
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(email);
+    setShowToast(true);
+    
+    // Esconde o toast após 3 segundos
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
+  };
+
   return (
     <footer className="footer" id="contact">
+      <div className={`toast ${showToast ? 'show' : ''}`}>
+        ✅ Email copiado com sucesso!
+      </div>
+
       <div className="container">
         <h2 className="footer-title">Vamos conversar</h2>
         
         <div className="footer-content-wrapper">
           <div className="contact-list">
-            <div className="contact-item action-item">
+            
+            <div className="contact-item">
               <span className="contact-label">Email:</span>
-              <a 
-                href="mailto:guilherme.romero074@gmail.com?subject=Agendamento de Entrevista&body=Olá Guilherme, vi seu portfólio e gostaria de agendar uma entrevista."
-                className="footer-btn"
+              <button 
+                onClick={handleCopyEmail} 
+                className="contact-value copy-btn"
+                title="Clique para copiar o email"
               >
-               Contato por Email
-              </a>
+                {email}
+                <span className="copy-icon" aria-label="ícone de copiar">📋</span>
+              </button>
             </div>
 
             <div className="contact-item">
@@ -33,7 +54,7 @@ export const Footer = () => {
             <div className="contact-item">
               <span className="contact-label">Linkedin:</span>
               <a 
-                href="https://www.linkedin.com/in/guilherme-romero-06586a289/" 
+                href="https://www.linkedin.com/in/seu-linkedin" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="contact-value"
@@ -41,18 +62,18 @@ export const Footer = () => {
                 Guilherme romero
               </a>
             </div>
-
-            <div className="contact-item whatsapp-item">
-              <span className="contact-label">WhatsApp:</span>
+            <div className="contact-item action-item">
+              <span className="contact-label">Contato pelo WhatsApp:</span>
               <a 
-                href="https://wa.me/5541984486364?text=Olá Guilherme, vi seu portfólio e gostaria de conversar!" 
+                href="https://wa.me/5541999998888" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="whatsapp-btn"
+                className="footer-btn"
               >
-                Contato por WhatsApp
+                Contato
               </a>
             </div>
+
           </div>
         </div>
 
