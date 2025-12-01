@@ -11,7 +11,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReact",
         policy => policy
-            .AllowAnyOrigin()
+            .WithOrigins(
+                "http://localhost:5173", 
+                "https://guigodev.github.io"
+            )
             .AllowAnyMethod()
             .AllowAnyHeader());
 });
