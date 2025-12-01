@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
+using System.Net.Http.Headers; // Necessário para o cabeçalho de autenticação
 
 namespace Portfolio.API.Controllers
 {
@@ -9,7 +10,6 @@ namespace Portfolio.API.Controllers
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
-        // Modelos para mapear o JSON que vem do GitHub
         private class GitHubRepo
         {
             public string name { get; set; } = string.Empty;
@@ -29,6 +29,8 @@ namespace Portfolio.API.Controllers
         {
             _httpClientFactory = httpClientFactory;
         }
+
+        // Método auxiliar atualizado para usar o Token
         private async Task<List<GitHubRepo>> FetchReposFromUser(HttpClient client, string user)
         {
             try 
@@ -41,16 +43,34 @@ namespace Portfolio.API.Controllers
             }
             catch
             {
-                // Se der erro em um usuário, retorna lista vazia para não quebrar o outro
                 return new List<GitHubRepo>();
             }
+        }
+
+        // Método para configurar o cliente com o Token
+        private HttpClient CreateGitHubClient()
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.DefaultRequestHeaders.Add("User-Agent", "GuigoDev-Portfolio-App");
+
+            // --- AQUI ESTÁ A MÁGICA ---
+            // Tenta pegar o token das variáveis de ambiente (do Render ou do seu PC)
+            var token = Environment.GetEnvironmentVariable("GITHUB_TOKEN");
+            
+            if (!string.IsNullOrEmpty(token))
+            {
+                client.DefaultRequestHeaders.Authorization = 
+                    new AuthenticationHeaderValue("Bearer", token);
+            }
+            // ---------------------------
+
+            return client;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetGitHubStats()
         {
-            var client = _httpClientFactory.CreateClient();
-            client.DefaultRequestHeaders.Add("User-Agent", "GuigoDev-Portfolio-App");
+            var client = CreateGitHubClient(); // Usa o método novo
 
             try
             {
@@ -83,8 +103,7 @@ namespace Portfolio.API.Controllers
         [HttpGet("repos")]
         public async Task<IActionResult> GetRepositories()
         {
-            var client = _httpClientFactory.CreateClient();
-            client.DefaultRequestHeaders.Add("User-Agent", "GuigoDev-Portfolio-App");
+            var client = CreateGitHubClient(); // Usa o método novo
 
             try
             {
@@ -92,10 +111,9 @@ namespace Portfolio.API.Controllers
                 var reposRomero = await FetchReposFromUser(client, "TheRomeroGuilherme");
 
                 var todosOsRepos = reposGuigo.Concat(reposRomero)
-                    .OrderByDescending(r => r.stargazers_count) // Ordena por popularidade
+                    .OrderByDescending(r => r.stargazers_count)
                     .ToList();
 
-                // Mapeia para o formato que o frontend precisa
                 var resultado = todosOsRepos.Select(r => new 
                 {
                     Id = Guid.NewGuid(),
