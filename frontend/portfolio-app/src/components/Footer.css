@@ -6,16 +6,17 @@
 }
 
 .footer-title {
- font-family: 'Laila', sans-serif;
   font-size: 2.5rem;
+  font-family: 'Laila', sans-serif;
   color: var(--text-light);
   text-align: center;
   margin-bottom: 2rem;
+  font-weight: 600;
 }
 
 .footer-content-wrapper {
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   width: 100%;
 }
 
@@ -24,7 +25,7 @@
   flex-direction: column;
   gap: 1rem;
   font-size: 1.1rem;
-  text-align: left; 
+  text-align: left;
 }
 
 .contact-item {
@@ -34,7 +35,7 @@
 }
 
 .contact-label {
-  color: var(--accent-orange); 
+  color: var(--accent-orange);
   font-weight: 500;
 }
 
@@ -49,12 +50,12 @@
   text-decoration: underline;
 }
 
-.whatsapp-item {
+.action-item {
   margin-top: 0.5rem;
   align-items: center;
 }
 
-.whatsapp-btn {
+.footer-btn {
   background-color: var(--accent-orange);
   color: var(--text-light);
   padding: 0.5rem 2rem;
@@ -65,8 +66,8 @@
   display: inline-block;
 }
 
-.whatsapp-btn:hover {
-  background-color: #e8630c; 
+.footer-btn:hover {
+  background-color: #e8630c;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
 }
@@ -86,7 +87,7 @@
     gap: 0.2rem;
   }
   
-  .whatsapp-item {
+  .action-item {
     flex-direction: row; 
     align-items: center;
     gap: 1rem;
