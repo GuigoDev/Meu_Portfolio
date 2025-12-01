@@ -1,72 +1,76 @@
 import { useState, useEffect } from 'react';
 import { Hero } from '../components/Hero';
-import { ProjectCard } from '../components/ProjectCard';
 import { SkillsDashboard } from '../components/SkillsDashboard';
-import { projectsApi } from '../services/api';
-import type { Project } from '../types';
+import { gitHubStatsApi } from '../services/api';
+import type { GitHubRepoDTO } from '../types';
 import './Home.css';
 
 export const Home = () => {
-  // --- Nossos novos estados ---
-  const [allProjects, setAllProjects] = useState<Project[]>([]); // Guarda *todos* os projetos
-  const [filteredProjects, setFilteredProjects] = useState<Project[]>([]); // Guarda os projetos *filtrados*
+  const [repos, setRepos] = useState<GitHubRepoDTO[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedTechnology, setSelectedTechnology] = useState('Todos'); // Guarda o filtro ativo
+  
+  // Estado para o filtro (opcional, se quiser filtrar os repos do GitHub também)
+  const [selectedTechnology, setSelectedTechnology] = useState('Todos');
 
-  // 1. Busca os projetos da API apenas uma vez
   useEffect(() => {
-    const loadProjects = async () => {
+    const loadRepos = async () => {
       try {
-        const response = await projectsApi.getAll();
-        setAllProjects(response.data); // Define a lista "mestra"
-        setFilteredProjects(response.data); // Define a lista a ser exibida (inicialmente todos)
+        const response = await gitHubStatsApi.getRepos();
+        setRepos(response.data);
       } catch (error) {
-        console.error('Erro ao carregar projetos:', error);
+        console.error('Erro ao carregar repositórios:', error);
       } finally {
         setLoading(false);
       }
     };
-    loadProjects();
+    loadRepos();
   }, []);
 
-  // 2. Este "efeito" roda toda vez que o filtro (selectedTechnology) muda
-  useEffect(() => {
-    if (selectedTechnology === 'Todos') {
-      setFilteredProjects(allProjects); // Mostra todos os projetos
-    } else {
-      // Filtra os projetos
-      const filtered = allProjects.filter(project =>
-        project.technologies
-          .split(',') // Ex: "React, .NET, C#"
-          .map(tech => tech.trim().toLowerCase()) // Ex: ["react", ".net", "c#"]
-          .includes(selectedTechnology.toLowerCase()) // Verifica se a tecnologia está na lista
-      );
-      setFilteredProjects(filtered);
-    }
-  }, [selectedTechnology, allProjects]); // Depende de mudanças no filtro ou na lista mestra
+  // Lógica de filtro simples para os repositórios (baseado na linguagem)
+  const filteredRepos = selectedTechnology === 'Todos' 
+    ? repos 
+    : repos.filter(repo => repo.language === selectedTechnology);
 
   return (
     <div>
       <Hero />
       
-      {/* Passamos o filtro ativo e a função para mudá-lo para o Dashboard */}
-      <SkillsDashboard
-        selectedTechnology={selectedTechnology}
-        onTechnologySelect={setSelectedTechnology}
+      {/* O Dashboard controla o filtro "selectedTechnology" */}
+      <SkillsDashboard 
+        selectedTechnology={selectedTechnology} 
+        onTechnologySelect={setSelectedTechnology} 
       />
 
       <section className="projects-section" id="projects">
         <div className="container">
           <h2 className="section-title">Meus Projetos</h2>
+          <div className="section-divider"></div>
+
           {loading ? (
-            <p className="loading-text">Carregando projetos...</p>
-          ) : filteredProjects.length === 0 ? ( // 3. Mostra a lista filtrada
-            <p className="no-projects">Nenhum projeto encontrado com essa tecnologia.</p>
+            <p className="loading-text">Carregando projetos do GitHub...</p>
           ) : (
-            <div className="projects-grid">
-              {/* 4. Renderiza apenas os projetos filtrados */}
-              {filteredProjects.map(project => (
-                <ProjectCard key={project.id} project={project} />
+            <div className="repo-list">
+              {filteredRepos.map(repo => (
+                <a 
+                  key={repo.id} 
+                  href={repo.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="repo-card"
+                >
+                  <div className="repo-avatar">
+                    <img src={repo.avatarUrl} alt="Avatar do proprietário" />
+                  </div>
+                  <div className="repo-info">
+                    <span className="repo-name">{repo.title}</span>
+                    {/* Mostra a linguagem se existir */}
+                    <span className="repo-lang">
+                      {repo.language !== "Outros" ? repo.language : ""}
+                    </span>
+                  </div>
+                  {/* Ícone de seta para indicar que é clicável (opcional) */}
+                  <div className="repo-arrow">&gt;</div>
+                </a>
               ))}
             </div>
           )}

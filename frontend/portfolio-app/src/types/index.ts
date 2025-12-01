@@ -26,12 +26,20 @@ export interface Experience {
   isCurrent: boolean;
 }
 
-// --- Esta é a correção ---
 export interface GitHubStats {
   totalRepositorios: number;
   totalEstrelas: number;
   linguagens: {
     key: string;
     value: number;
-  }[]; // Deve ser um ARRAY de objetos { key: string, value: number }
+  }[]; 
+}
+
+export interface GitHubRepoDTO {
+  id: string;
+  title: string;
+  description: string;
+  url: string;
+  language: string;
+  avatarUrl: string;
 }
