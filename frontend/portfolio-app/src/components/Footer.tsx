@@ -8,13 +8,10 @@ export const Footer = () => {
         
         <div className="footer-content-wrapper">
           <div className="contact-list">
-            <div className="contact-item action-item">
+            <div className="contact-item">
               <span className="contact-label">Email:</span>
-              <a 
-                href="mailto:guilherme.romero074@gmail.com?subject=Agendamento de Entrevista&body=Olá Guilherme, vi seu portfólio e gostaria de agendar uma entrevista."
-                className="footer-btn"
-              >
-                Agendar Entrevista
+              <a href="mailto:guilherme.romero074@gmail.com" className="contact-value">
+                guilherme.romero074@gmail.com
               </a>
             </div>
 
@@ -45,7 +42,7 @@ export const Footer = () => {
             <div className="contact-item whatsapp-item">
               <span className="contact-label">Contato pelo WhatsApp:</span>
               <a 
-                href="https://wa.me/5541984486364?text=Olá Guilherme, vi seu portfólio e gostaria de agendar uma entrevista!" 
+                href="https://wa.me/5541984486364?text=Olá Guilherme, vi seu portfólio e gostaria de conversar!" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="whatsapp-btn"
