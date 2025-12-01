@@ -48,7 +48,7 @@ cd backend/Portfolio.API
 dotnet restore
 
 # Execute o projeto
-dotnet run
+dotnet watch run
 
 A API estará rodando em http://localhost:5100.
 
