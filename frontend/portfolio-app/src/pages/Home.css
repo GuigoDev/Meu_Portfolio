@@ -19,7 +19,6 @@
   opacity: 0.5;
 }
 
-/* Container da lista */
 .repo-list {
   display: flex;
   flex-direction: column;
@@ -28,11 +27,9 @@
   margin: 0 auto;
 }
 
-/* O Card do Projeto */
 .repo-card {
   display: flex;
   align-items: center;
-  /* Cor marrom baseada na sua imagem de referência */
   background-color: #784421; 
   padding: 1rem;
   border-radius: 12px;
@@ -44,16 +41,15 @@
 
 .repo-card:hover {
   transform: translateX(5px);
-  background-color: #8a5028; /* Um tom ligeiramente mais claro no hover */
+  background-color: #8a5028;
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
-/* Quadrado da Imagem/Avatar */
 .repo-avatar {
   width: 60px;
   height: 60px;
-  background-color: #ccc; /* Cor de fundo caso a imagem falhe */
-  border-radius: 4px; /* Levemente arredondado */
+  background-color: #ccc; 
+  border-radius: 4px;
   overflow: hidden;
   margin-right: 1.5rem;
   flex-shrink: 0;
@@ -66,11 +62,10 @@
   object-fit: cover;
 }
 
-/* Informações de Texto */
 .repo-info {
   display: flex;
   flex-direction: column;
-  flex: 1; /* Ocupa o espaço restante */
+  flex: 1;
 }
 
 .repo-name {
@@ -86,7 +81,6 @@
   font-style: italic;
 }
 
-/* Seta indicativa na direita */
 .repo-arrow {
   font-size: 1.5rem;
   color: var(--accent-orange);
@@ -99,4 +93,50 @@
   color: var(--text-secondary);
   font-size: 1.2rem;
   margin-top: 2rem;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.pagination-btn {
+  background: transparent;
+  color: var(--accent-orange);
+  border: 2px solid var(--accent-orange);
+  font-size: 1.5rem;
+  font-weight: bold;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 4px; 
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background: var(--accent-orange);
+  color: white;
+}
+
+.pagination-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  border-color: var(--text-secondary);
+  color: var(--text-secondary);
+}
+
+.pagination-info {
+  background: var(--accent-orange);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1.1rem;
 }
