@@ -9,13 +9,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 2rem;
+  gap: 3rem; /* Aumentei o espaço */
 }
 
+/* --- MUDANÇAS AQUI --- */
 .hero-text {
-  flex: 1; 
+  flex: 1;
   max-width: 600px;
   animation: fadeInUp 0.8s ease;
+  /* Centraliza todo o texto e botões na coluna da direita */
+  text-align: center; 
 }
 
 .hero-image {
@@ -24,27 +27,30 @@
 }
 
 .hero-image img {
-  max-width: 450px; 
+  max-width: 550px;
   height: auto;
 }
 
 .hero-title {
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   margin-bottom: 1rem;
+  /* Remove o highlight padrão da variável --accent-blue */
+  color: var(--text-light); 
 }
 
 .highlight {
+  /* Adiciona o highlight laranja */
   color: var(--accent-orange);
 }
 
 .hero-subtitle {
-  font-size: 1.5rem;
+  font-size: 1.5rem; /* Fonte menor */
   color: var(--text-secondary);
   margin-bottom: 1.5rem;
 }
 
 .hero-description {
-  font-size: 1.1rem;
+  font-size: 1.1rem; /* Fonte menor */
   color: var(--text-secondary);
   margin-bottom: 2rem;
   line-height: 1.8;
@@ -53,10 +59,12 @@
 .hero-buttons {
   display: flex;
   gap: 1rem;
+  /* Centraliza os botões */
+  justify-content: center;
 }
 
 .btn {
-  padding: 1rem 2rem;
+  padding: 0.8rem 1.8rem; /* Botões um pouco menores */
   border-radius: 8px;
   font-size: 1rem;
   font-weight: 600;
@@ -64,17 +72,21 @@
   display: inline-block;
 }
 
+/* --- ESTILO NOVO BTN-PRIMARY --- */
 .btn-primary {
   background: var(--accent-orange);
   color: var(--text-light);
+  border: 2px solid var(--accent-orange);
 }
 
 .btn-primary:hover {
-  background: var(--accent-orange);
+  background: var(--accent-light-orange); /* Usando a nova cor */
+  border-color: var(--accent-light-orange);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(246, 171, 59, 0.653);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
 }
 
+/* --- ESTILO NOVO BTN-SECONDARY --- */
 .btn-secondary {
   background: transparent;
   border: 2px solid var(--accent-orange);

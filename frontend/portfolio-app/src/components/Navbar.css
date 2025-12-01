@@ -1,10 +1,12 @@
 .navbar {
-  background: var(--secondary-dark);
+  /* Alterado para o fundo mais escuro */
+  background: var(--secondary-dark); 
   padding: 1.5rem 0;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  /* Substituímos o box-shadow por uma borda inferior */
+  border-bottom: 1px solid var(--secondary-dark);
 }
 
 .navbar-content {
@@ -24,21 +26,29 @@
 
 .logo-highlight {
   font-family: 'Jaro', sans-serif;
-  color: #F97316;
+  /* Usando a variável de cor laranja do seu Global.css */
+  color: var(--accent-orange); 
 }
 
 .nav-links {
   display: flex;
   list-style: none;
-  gap: 2rem;
+  gap: 1rem; /* Reduzimos o espaço entre os botões */
 }
 
+/* --- Novas regras de estilo para os links --- */
 .nav-links a {
+  font-size: 0.95rem;
   color: var(--text-secondary);
   font-weight: 500;
-  transition: color 0.3s ease;
+  text-decoration: none;
+  padding: 0.75rem 1.25rem; /* Adiciona espaçamento interno */
+  border-radius: 8px; /* Arredonda as bordas */
+  background: var(--secondary-dark); /* Fundo da pílula */
+  transition: all 0.3s ease;
 }
 
 .nav-links a:hover {
-  color: var(--accent-blue);
+  color: var(--text-light);
+  background: var(--accent-orange); /* Destaque laranja ao passar o mouse */
 }

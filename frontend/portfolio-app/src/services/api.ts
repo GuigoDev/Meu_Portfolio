@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { Project, Skill, Experience } from '../types';
+import type { Project, Skill, Experience, GitHubStats } from '../types'; 
 
 const api = axios.create({
   baseURL: 'http://localhost:5100/api'
@@ -18,4 +18,9 @@ export const skillsApi = {
 
 export const experiencesApi = {
   getAll: () => api.get<Experience[]>('/experiences')
+};
+
+// Adicione este novo objeto para a API do GitHub
+export const gitHubStatsApi = {
+  getStats: () => api.get<GitHubStats>('/githubstats')
 };

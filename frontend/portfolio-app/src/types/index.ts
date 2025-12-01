@@ -25,3 +25,13 @@ export interface Experience {
   endDate?: string;
   isCurrent: boolean;
 }
+
+// --- Esta é a correção ---
+export interface GitHubStats {
+  totalRepositorios: number;
+  totalEstrelas: number;
+  linguagens: {
+    key: string;
+    value: number;
+  }[]; // Deve ser um ARRAY de objetos { key: string, value: number }
+}

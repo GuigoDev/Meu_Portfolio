@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Portfolio.API.Data;
+using System.Text.Json; // 1. Importar
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +18,15 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader());
 });
 
-builder.Services.AddControllers();
+builder.Services.AddHttpClient();
+
+// 2. Adicionar configuração de Controllers
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        // 3. Configurar JSON para usar camelCase
+        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+    });
 
 var app = builder.Build();
 
