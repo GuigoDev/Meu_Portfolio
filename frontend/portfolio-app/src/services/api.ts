@@ -2,7 +2,7 @@ import axios from 'axios';
 import type { Project, Skill, Experience, GitHubStats, GitHubRepoDTO } from '../types';
 
 const baseURL = import.meta.env.PROD
-  ? 'https://meu-protfolio.onrender.com'
+  ? 'https://meu-protfolio.onrender.com/api'
   : 'http://localhost:5100/api';
 
 const api = axios.create({
