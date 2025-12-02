@@ -35,7 +35,7 @@ export const Footer = () => {
                 title="Clique para copiar o email"
               >
                 {email}
-                <span className="copy-icon" aria-label="ícone de copiar">📋</span>
+                <span className="copy-icon" aria-label="ícone de copiar"></span>
               </button>
             </div>
 
