@@ -54,7 +54,7 @@ export const Footer = () => {
             <div className="contact-item">
               <span className="contact-label">Linkedin:</span>
               <a 
-                href="https://www.linkedin.com/in/seu-linkedin" 
+                href="https://www.linkedin.com/in/guilherme-romero-06586a289/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="contact-value"
@@ -63,9 +63,9 @@ export const Footer = () => {
               </a>
             </div>
             <div className="contact-item action-item">
-              <span className="contact-label">Contato pelo WhatsApp:</span>
+              <span className="contact-label">WhatsApp:</span>
               <a 
-                href="https://wa.me/5541999998888" 
+                href="https://wa.me/5541984486364?text=Olá Guilherme, vi seu portfólio e gostaria de conversar!" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="footer-btn"
